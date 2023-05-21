@@ -120,6 +120,38 @@
 
         deleteCourse($COURSE_ID, $conn);
     }
+
+    if(1==1){
+        function registerUser($username, $email, $password, $conn) {
+            $sql = "INSERT INTO Users (user_id, username, email, password)
+                    VALUES (user_id_seq.NEXTVAL, :username, :email, :password)";
+            
+            $stmt = oci_parse($conn, $sql);
+            oci_bind_by_name($stmt, ':username', $username);
+            oci_bind_by_name($stmt, ':email', $email);
+            oci_bind_by_name($stmt, ':password', $password);
+            
+            try {
+                oci_execute($stmt);
+                
+                // Check if the user was registered successfully
+                $rowsAffected = oci_num_rows($stmt);
+                
+                if ($rowsAffected > 0) {
+                    echo "User registered successfully.";
+                } else {
+                    echo "Failed to register user.";
+                }
+                
+                oci_free_statement($stmt);
+            } catch (Exception $e) {
+                echo "Failed to register user: " . $e->getMessage();
+            }
+        }
+        
+        // Usage example:
+        registerUser('john', 'john@example.com', 'password123', $conn);
+    }
     
 
 

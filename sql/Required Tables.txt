@@ -87,6 +87,13 @@ CREATE TABLE Course (
     FOREIGN KEY (instructor_id) REFERENCES Instructors (instructor_id)
 );
 
+CREATE TABLE Course_History (
+    course_id INT PRIMARY KEY
+    enrollment_count INT,
+    ratings INT,
+    FOREIGN KEY (course_id) REFERENCES Course (course_id)
+);
+
 CREATE TABLE Enrollment (
     enrollment_id INT PRIMARY KEY,
     course_id INT,
