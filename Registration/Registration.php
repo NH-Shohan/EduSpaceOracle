@@ -12,6 +12,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduSpace</title>
     <link rel="stylesheet" href="./../../ADMS/styles.css">
+
+    <style>
+        .select_role {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 15px;
+        }
+
+        .single_role {
+            display: flex;
+        }
+
+        .single_role label {
+            padding-inline: 7px;
+        }
+    </style>
 </head>
 
 <body>
@@ -146,12 +163,23 @@
                                     ?>
                                 </span>
                                 <br />
+
+                                <div class="select_role">
+                                    <div class="single_role">
+                                        <input type="radio" id="student" name="role">
+                                        <label for="student">Student</label><br>
+                                    </div>
+                                    <div class="single_role">
+                                        <input type="radio" id="teacher" name="role">
+                                        <label for="teacher">Teacher</label><br>
+                                    </div>
+                                </div>
+
                                 <div class="submit-btn">
                                     <input class="auth-submit-button" type="submit" name="submit" value="Register">
                                 </div>
                                 <br /> <br />
                                 <p>Already have an account? <a href="./../../ADMS/Login/Login.php">Login here</a>.</p>
-
                             </form>
                         </div>
                     </div>

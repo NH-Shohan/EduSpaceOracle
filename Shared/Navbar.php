@@ -1,5 +1,7 @@
 <?php
-// session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 // require_once 'Controller/UserController.php';
 ?>
 <!DOCTYPE html>
@@ -62,7 +64,7 @@
                 <ion-icon name="cart-outline"></ion-icon> -->
 
                 <?php
-                if (empty($_COOKIE['loggedUser'])) {
+                if (empty($_SESSION['VALID'])) {
                 ?>
                     <a class="login_btn" href="./../../ADMS/Login/Login.php">Login</a>
                     <a class="registration_btn" href="./../../ADMS/Registration/Registration.php">Registration</a>
@@ -85,21 +87,34 @@
                         return $decryptedData;
                     }
 
-                    $encryptedData = $_COOKIE['loggedUser'];
-                    $decryptedData = decryptNav($encryptedData, 'secret_key');
-                    $userData = json_decode($decryptedData, true);
+                    // $encryptedData = $_COOKIE['loggedUser'];
+                    // $decryptedData = decryptNav($encryptedData, 'secret_key');
+                    // $userData = json_decode($decryptedData, true);
 
-                    $_SESSION["authEvent"] = "logout";
+                    // $_SESSION["authEvent"] = "logout";
                 ?>
-                    <a class="registration_btn" href="">Logout</a>
-                    <span>
-                        <a style="color:var(--darkText);" href="profile.php">
-                            <?php echo $userData['NAME'] ?>
-                        </a>
-                    </span>
-                <?php
+                    <div>
+                        <?php
+                        if (isset($_SESSION['User_Name'])) {
+                            echo $_SESSION['User_Name'] . " ";
+                        }
+                        ?>
+                        <?php
+                        if (isset($_SESSION['VALID'])) {
+                            if (!empty($_SESSION['VALID'])) {
+                        ?>
+                                <a class="registration_btn" href="./../../ADMS/Control/UserController.php">Logout</a>
+                                <span>
+                                    <a style="color:var(--darkText);" href="profile.php">
+
+                                    </a>
+                                </span>
+                        <?php }
+                        } ?>
+                    <?php
                 }
-                ?>
+                    ?>
+                    </div>
             </div>
         </div>
     </div>
