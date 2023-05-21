@@ -63,31 +63,57 @@ include('../model/database.php');
         <div class="dashboard_content_section">
             <div class="dash_container">
                 <form method="POST" class="row">
-                    <div class="col-6">
-                        <label for="course_name">Course Name</label>
-                        <input type="text" name="COURSE_NAME">
+                <?php 
+                    if(isset($_POST['editCourse'])){
+                        function UPDATECOURSE() {
+                            $id = $_POST['editCourse'];
+                            $connection = connection();
+                            $sql = "SELECT * FROM course where course_id = $id";
+                            
+                            $stmt = oci_parse($connection, $sql);
+                            
+                            try {
+                                oci_execute($stmt);
+                                while ($row = oci_fetch_assoc($stmt)) {
+                                
+                                    
+                                            echo  '<div class="col-6">
+                                            <label for="course_name">Course Name</label>
+                                            <input type="text" name="COURSE_NAME" value='.$row['COURSE_NAME'].'>
 
-                        <label for="COURSE_DURATION">Course Duration</label>
-                        <input type="number" name="COURSE_DURATION">
+                                            <label for="COURSE_DURATION">Course Duration</label>
+                                            <input type="number" name="COURSE_DURATION" value='.$row['COURSE_DURATION'].'>
 
-                        <label for="COURSE_PRICE">Course Price</label>
-                        <input type="number" name="COURSE_PRICE">
-                    </div>
+                                            <label for="COURSE_PRICE">Course Price</label>
+                                            <input type="number" name="COURSE_PRICE" value='.$row['COURSE_PRICE'].'>
+                                        </div>
 
-                    <div class="col-6">
-                        <label for="COURSE_DESCRIPTION">Course Descripion</label>
-                        <textarea type="text" name="COURSE_DESCRIPTION"></textarea>
+                                        <div class="col-6">
+                                            <label for="COURSE_DESCRIPTION">Course Descripion</label>
+                                            <input type="text" name="COURSE_DESCRIPTION" value='.$row['COURSE_DESCRIPTION'].'></input>
 
-                        <label for="INSTRUCTOR_ID">Instructor ID</label>
-                        <input type="number" name="INSTRUCTOR_ID">
+                                            <label for="INSTRUCTOR_ID">Instructor ID</label>
+                                            <input type="number" name="INSTRUCTOR_ID" value='.$row['INSTRUCTOR_ID'].'>
 
-                        <label for="CATEGORY_ID">Category ID</label>
-                        <input type="number" name="CATEGORY_ID">
-                    </div>
+                                            <label for="CATEGORY_ID">Category ID</label>
+                                            <input type="number" name="CATEGORY_ID" value='.$row['CATEGORY_ID'].'>
+                                        </div>
 
-                    <div class="w-25 m-auto">
-                        <button class="btn btn-success w-100 " type="submit" name="addCourse">UPDATE</button>
-                    </div>
+                                        <div class="w-25 m-auto">
+                                            <button class="btn btn-success w-100 " type="submit" name="updateCourse">UPDATE</button>
+                                        </div>';
+
+
+                                }
+                            } catch (Exception $e) {
+                                echo "Failed to retrieve courses: " . $e->getMessage();
+                            }
+                        }
+
+                        UPDATECOURSE();
+                    }
+                ?>
+                    
                 </form>
             </div>
 
@@ -118,7 +144,7 @@ include('../model/database.php');
                                     <p>Category: <?php echo $row['CATEGORY_ID']; ?></p>
                                     <p>Available from: <?php echo $row['CREATED_DATE']; ?></p>
                                     <form method="POST">
-                                        <button type="submit" class="btn btn-success w-100" name="deleteCourse" value="<?php echo $row['COURSE_ID']; ?>">Edit</button>
+                                        <button type="submit" class="btn btn-success w-100" name="editCourse" value="<?php echo $row['COURSE_ID']; ?>">Edit</button>
                                     </form>
                                 </div>
                             </div>

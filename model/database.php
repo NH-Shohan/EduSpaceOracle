@@ -1,14 +1,41 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-$conn = oci_connect("system", "Anamika", "localhost/XE");
-if (!$conn) {
 
-    $error = oci_error();
-    trigger_error(htmlentities($error['message'], ENT_QUOTES), E_USER_ERROR);
-}
+    function connection()
+        {
+            $connectionObject = oci_connect("system","1234","localhost/XE");
+            if(!$connectionObject){
 
+                $error = oci_error();
+                trigger_error(htmlentities($error['message'], ENT_QUOTES),E_USER_ERROR);
+            }
+            
+            return $connectionObject;
+    }
+
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    $conn = oci_connect("system", "1234", "localhost/XE");
+    if (!$conn) {
+
+        $error = oci_error();
+        trigger_error(htmlentities($error['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+
+if(isset($_POST['updateCourse'])){
+    $connection = connection();
+    $ID = $_REQUEST['updateCourse'];
+    echo $ID;
+    $COURSE_NAME = $_REQUEST['COURSE_NAME'];
+    $COURSE_DESCRIPTION = $_REQUEST['COURSE_DESCRIPTION'];
+    $COURSE_PRICE = $_REQUEST['COURSE_PRICE'];
+    $COURSE_DURATION = $_REQUEST['COURSE_DURATION'];
+    $INSTRUCTOR_ID = $_REQUEST['INSTRUCTOR_ID'];
+    $CATEGORY_ID = $_REQUEST['CATEGORY_ID'];
+    $query = oci_parse($connection, "UPDATE COURSE SET COURSE_NAME = '$COURSE_NAME', COURSE_DESCRIPTION = '$COURSE_DESCRIPTION', COURSE_PRICE = $COURSE_PRICE, COURSE_DURATION= $COURSE_DURATION, INSTRUCTOR_ID = $INSTRUCTOR_ID, CATEGORY_ID = $CATEGORY_ID WHERE COURSE_ID = $ID");
+    $result = oci_execute($query);
+}
 
 if (isset($_POST['login'])) {
 
