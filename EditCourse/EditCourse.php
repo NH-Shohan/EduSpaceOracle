@@ -27,6 +27,7 @@ include('../model/database.php');
         }
 
         .dashboard_content_section {
+            overflow: auto;
             margin-inline: 20px;
             padding: 20px;
         }
@@ -60,6 +61,36 @@ include('../model/database.php');
         </div>
 
         <div class="dashboard_content_section">
+            <div class="dash_container">
+                <form method="POST" class="row">
+                    <div class="col-6">
+                        <label for="course_name">Course Name</label>
+                        <input type="text" name="COURSE_NAME">
+
+                        <label for="COURSE_DURATION">Course Duration</label>
+                        <input type="number" name="COURSE_DURATION">
+
+                        <label for="COURSE_PRICE">Course Price</label>
+                        <input type="number" name="COURSE_PRICE">
+                    </div>
+
+                    <div class="col-6">
+                        <label for="COURSE_DESCRIPTION">Course Descripion</label>
+                        <textarea type="text" name="COURSE_DESCRIPTION"></textarea>
+
+                        <label for="INSTRUCTOR_ID">Instructor ID</label>
+                        <input type="number" name="INSTRUCTOR_ID">
+
+                        <label for="CATEGORY_ID">Category ID</label>
+                        <input type="number" name="CATEGORY_ID">
+                    </div>
+
+                    <div class="w-25 m-auto">
+                        <button class="btn btn-success w-100 " type="submit" name="addCourse">UPDATE</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="mt-5 card_container row gap-2">
                 <?php
                 function showAllCourses($conn)
