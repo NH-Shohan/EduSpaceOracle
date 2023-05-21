@@ -1,0 +1,150 @@
+CREATE TABLE Admin (
+    admin_id INT PRIMARY KEY,
+    admin_name VARCHAR(255),
+    admin_email VARCHAR(255),
+    admin_password VARCHAR(255)
+);
+
+-> INSERT INTO Admin (admin_id, admin_name, admin_email, admin_password) VALUES (1, 'John Doe', 'john@example.com', 'admin123');
+-> INSERT INTO Admin (admin_id, admin_name, admin_email, admin_password) VALUES (2, 'Jane Smith', 'jane@example.com', 'admin456');
+
+CREATE TABLE Instructors (
+    instructor_id INT PRIMARY KEY,
+    instructor_name VARCHAR(255),
+    instructor_email VARCHAR(255),
+    instructor_password VARCHAR(255),
+    instructor_bio VARCHAR(255)
+);
+
+-> INSERT INTO Instructors (instructor_id, instructor_name, instructor_email, instructor_password, instructor_bio) VALUES (instructor_id_seq.nextval, 'Michael Johnson', 'michael@example.com', 'instructor123', 'Experienced instructor with expertise in web development.');
+-> INSERT INTO Instructors (instructor_id, instructor_name, instructor_email, instructor_password, instructor_bio) VALUES (instructor_id_seq.nextval, 'Sarah Adams', 'sarah@example.com', 'instructor456', 'Passionate about teaching mathematics to students.');
+
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(255),
+    student_email VARCHAR(255),
+    student_password VARCHAR(255),
+    student_date_of_birth DATE,
+    student_address VARCHAR(255)
+);
+
+-> INSERT INTO Students (student_id, student_name, student_email, student_password, student_date_of_birth, student_address) VALUES (student_id_seq.nextval, 'Alex Johnson', 'alex@example.com', 'student123', TO_DATE('2000-05-15', 'YYYY-MM-DD'), '123 Main Street, City');
+-> INSERT INTO Students (student_id, student_name, student_email, student_password, student_date_of_birth, student_address) VALUES (student_id_seq.nextval, 'Emily Smith', 'emily@example.com', 'student456', TO_DATE('1999-09-25', 'YYYY-MM-DD'), '456 Elm Street, Town');
+
+CREATE TABLE SalesMarketingTeam (
+    team_member_id INT PRIMARY KEY,
+    team_member_name VARCHAR(255),
+    team_member_email VARCHAR(255),
+    team_member_password VARCHAR(255),
+    team_member_role VARCHAR(255)
+);
+
+CREATE TABLE CustomerSupport (
+    support_rep_id INT PRIMARY KEY,
+    support_rep_name VARCHAR(255),
+    support_rep_email VARCHAR(255),
+    support_rep_password VARCHAR(255)
+);
+
+CREATE TABLE FinanceAccounting (
+    finance_id INT PRIMARY KEY,
+    finance_name VARCHAR(255),
+    finance_email VARCHAR(255),
+    finance_password VARCHAR(255)
+);
+
+CREATE TABLE AnalyticsTeam (
+    analyst_id INT PRIMARY KEY,
+    analyst_name VARCHAR(255),
+    analyst_email VARCHAR(255),
+    analyst_password VARCHAR(255)
+);
+
+CREATE TABLE SystemDevelopers (
+    developer_id INT PRIMARY KEY,
+    developer_name VARCHAR(255),
+    developer_email VARCHAR(255),
+    developer_password VARCHAR(255)
+);
+
+CREATE TABLE CourseReviewers (
+    reviewer_id INT PRIMARY KEY,
+    reviewer_name VARCHAR(255),
+    reviewer_email VARCHAR(255),
+    reviewer_password VARCHAR(255)
+);
+
+
+CREATE TABLE Course (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(255),
+    course_description VARCHAR(255),
+    course_price DECIMAL(10, 2),
+    course_duration INT,
+    instructor_id INT,
+    category_id INT,
+    created_date DATE,
+    FOREIGN KEY (instructor_id) REFERENCES Instructors (instructor_id)
+);
+
+CREATE TABLE Enrollment (
+    enrollment_id INT PRIMARY KEY,
+    course_id INT,
+    student_id INT,
+    enrollment_date DATE,
+    FOREIGN KEY (course_id) REFERENCES Course (course_id),
+    FOREIGN KEY (student_id) REFERENCES Students (student_id)
+);
+
+CREATE TABLE Payment (
+    payment_id INT PRIMARY KEY,
+    enrollment_id INT,
+    payment_date DATE,
+    payment_amount DECIMAL(10, 2),
+    payment_status VARCHAR(255),
+    FOREIGN KEY (enrollment_id) REFERENCES Enrollment (enrollment_id)
+);
+
+CREATE TABLE CourseContent (
+    content_id INT PRIMARY KEY,
+    course_id INT,
+    content_title VARCHAR(255),
+    content_description VARCHAR(255),
+    content_type VARCHAR(255),
+    content_url VARCHAR(255),
+    FOREIGN KEY (course_id) REFERENCES Course (course_id)
+);
+
+CREATE TABLE DiscussionForum (
+    discussion_id INT PRIMARY KEY,
+    course_id INT,
+    student_id INT,
+    discussion_title VARCHAR(255),
+    discussion_content VARCHAR(255),
+    discussion_date DATE,
+    FOREIGN KEY (course_id) REFERENCES Course (course_id),
+    FOREIGN KEY (student_id) REFERENCES Students (student_id)
+);
+
+CREATE TABLE FeedbackRating (
+    feedback_id INT PRIMARY KEY,
+    course_id INT,
+    student_id INT,
+    feedback_content VARCHAR(255),
+    rating INT,
+    feedback_date DATE,
+    FOREIGN KEY (course_id) REFERENCES Course (course_id),
+    FOREIGN KEY (student_id) REFERENCES Students (student_id)
+);
+
+CREATE TABLE SalesRevenue (
+    sale_id INT PRIMARY KEY,
+    course_id INT,
+    student_id INT,
+    sale_date DATE,
+    sale_amount DECIMAL(10, 2),
+    payment_id INT,
+    FOREIGN KEY (course_id) REFERENCES Course (course_id),
+    FOREIGN KEY (student_id) REFERENCES Students (student_id),
+    FOREIGN KEY (payment_id) REFERENCES Payment (payment_id)
+);

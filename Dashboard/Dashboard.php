@@ -1,3 +1,7 @@
+<?php
+    include('../model/database.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +18,15 @@
 
 <body>
     <?php include "./../../ADMS/Shared/Navbar.php" ?>
-    Dashboard
+    <form method="POST" class="bg-success">
+        <input type="text" name="COURSE_NAME">
+        <input type="text" name="COURSE_DESCRIPTION">
+        <input type="number" name="COURSE_PRICE">
+        <input type="number" name="COURSE_DURATION">
+        <input type="number" name="INSTRUCTOR_ID">
+        <input type="number" name="CATEGORY_ID">
+        <button type="submit" name="addCourse">ADD</button>
+    </form>
     <?php include "./../../ADMS/Shared/Footer.php" ?>
 </body>
 
