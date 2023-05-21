@@ -22,6 +22,47 @@ include('../model/database.php');
             margin-inline: 15%;
             margin-block: 80px !important;
         }
+
+        .card-text {
+            font-size: 15px;
+        }
+
+        .card_id,
+        .course_id {
+            background-color: #444444;
+            width: fit-content;
+            padding: 1px 7px;
+            border-radius: 7px;
+            font-size: 13px;
+            color: white;
+            display: inline;
+        }
+
+        .instructor_id {
+            background-color: #444444;
+            width: fit-content;
+            padding: 1px 7px;
+            border-radius: 7px;
+            font-size: 13px;
+            color: white;
+        }
+
+        .card_price {
+            font-weight: 600;
+            color: #6f7dff;
+            font-size: 24px;
+            display: inline-block;
+        }
+
+        .card_duration {
+            display: inline;
+            font-weight: 500;
+            float: right;
+        }
+
+        .card_date {
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -47,12 +88,12 @@ include('../model/database.php');
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['COURSE_NAME']; ?></h5>
                             <p class="card-text"><?php echo $row['COURSE_DESCRIPTION']; ?></p>
-                            <p>Course ID: <?php echo $row['COURSE_ID']; ?></p>
-                            <p>Price: <?php echo $row['COURSE_PRICE']; ?></p>
-                            <p>Duration: <?php echo $row['COURSE_DURATION']; ?></p>
-                            <p>Instructor ID: <?php echo $row['INSTRUCTOR_ID']; ?></p>
-                            <p>Category: <?php echo $row['CATEGORY_ID']; ?></p>
-                            <p>Available from: <?php echo $row['CREATED_DATE']; ?></p>
+                            <p class="card_id">ID <?php echo $row['CATEGORY_ID']; ?></p>
+                            <p class="course_id">Course ID <?php echo $row['COURSE_ID']; ?></p>
+                            <p class="instructor_id">Instructor ID <?php echo $row['INSTRUCTOR_ID']; ?></p>
+                            <p class="card_price"><?php echo $row['COURSE_PRICE']; ?>$</p>
+                            <p class="card_duration"><?php echo $row['COURSE_DURATION']; ?> min</p>
+                            <p class="card_date">Available on <?php echo $row['CREATED_DATE']; ?></p>
                             <form method="POST">
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-success w-100" name="deleteCourse" value="<?php echo $row['COURSE_ID']; ?>">See More</button>
