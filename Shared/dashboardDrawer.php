@@ -90,6 +90,8 @@
                 <a class="<?= $page === 'AddCourses.php' ? 'drawer_active' : 'drawer_nav_link'; ?>" href="./../../ADMS/AddCourses/AddCourses.php">Add Course</a>
 
                 <a class="<?= $page === 'DeleteCourse.php' ? 'drawer_active' : 'drawer_nav_link'; ?>" href="./../../ADMS/DeleteCourse/DeleteCourse.php">Delete Course</a>
+
+                <a class="<?= $page === 'EditCourse.php' ? 'drawer_active' : 'drawer_nav_link'; ?>" href="./../../ADMS/EditCourse/EditCourse.php">Edit Course</a>
             </div>
         </div>
     </div>
