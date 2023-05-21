@@ -72,8 +72,7 @@ include('../model/database.php');
         <?php
         function showAllCourses($conn)
         {
-            $sql = "SELECT *
-                FROM Course";
+            $sql = "SELECT * FROM Course";
 
             $stmt = oci_parse($conn, $sql);
 

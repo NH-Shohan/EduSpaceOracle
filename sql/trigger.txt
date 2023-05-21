@@ -1,0 +1,6 @@
+CREATE OR REPLACE TRIGGER COURSE_COUNT
+AFTER INSERT OR DELETE ON course
+FOR EACH ROW
+BEGIN
+  UPDATE Course_History SET enrollment_count = (SELECT COUNT(*) FROM course WHERE course_id = :NEW.course_id) WHERE course_id = :NEW.course_id;
+END;

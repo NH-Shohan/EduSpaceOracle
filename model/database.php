@@ -1,14 +1,41 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-$conn = oci_connect("system", "Anamika", "localhost/XE");
-if (!$conn) {
 
-    $error = oci_error();
-    trigger_error(htmlentities($error['message'], ENT_QUOTES), E_USER_ERROR);
-}
+    function connection()
+        {
+            $connectionObject = oci_connect("system","1234","localhost/XE");
+            if(!$connectionObject){
 
+                $error = oci_error();
+                trigger_error(htmlentities($error['message'], ENT_QUOTES),E_USER_ERROR);
+            }
+            
+            return $connectionObject;
+    }
+
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    $conn = oci_connect("system", "1234", "localhost/XE");
+    if (!$conn) {
+
+        $error = oci_error();
+        trigger_error(htmlentities($error['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+
+if(isset($_POST['updateCourse'])){
+    $connection = connection();
+    $ID = $_REQUEST['updateCourse'];
+    echo $ID;
+    $COURSE_NAME = $_REQUEST['COURSE_NAME'];
+    $COURSE_DESCRIPTION = $_REQUEST['COURSE_DESCRIPTION'];
+    $COURSE_PRICE = $_REQUEST['COURSE_PRICE'];
+    $COURSE_DURATION = $_REQUEST['COURSE_DURATION'];
+    $INSTRUCTOR_ID = $_REQUEST['INSTRUCTOR_ID'];
+    $CATEGORY_ID = $_REQUEST['CATEGORY_ID'];
+    $query = oci_parse($connection, "UPDATE COURSE SET COURSE_NAME = '$COURSE_NAME', COURSE_DESCRIPTION = '$COURSE_DESCRIPTION', COURSE_PRICE = $COURSE_PRICE, COURSE_DURATION= $COURSE_DURATION, INSTRUCTOR_ID = $INSTRUCTOR_ID, CATEGORY_ID = $CATEGORY_ID WHERE COURSE_ID = $ID");
+    $result = oci_execute($query);
+}
 
 if (isset($_POST['login'])) {
 
@@ -132,6 +159,39 @@ if (isset($_POST['deleteCourse'])) {
             echo "Failed to delete course: " . $e->getMessage();
         }
     }
+
+    if(1==1){
+        function registerUser($username, $email, $password, $conn) {
+            $sql = "INSERT INTO Users (user_id, username, email, password)
+                    VALUES (user_id_seq.NEXTVAL, :username, :email, :password)";
+            
+            $stmt = oci_parse($conn, $sql);
+            oci_bind_by_name($stmt, ':username', $username);
+            oci_bind_by_name($stmt, ':email', $email);
+            oci_bind_by_name($stmt, ':password', $password);
+            
+            try {
+                oci_execute($stmt);
+                
+                // Check if the user was registered successfully
+                $rowsAffected = oci_num_rows($stmt);
+                
+                if ($rowsAffected > 0) {
+                    echo "User registered successfully.";
+                } else {
+                    echo "Failed to register user.";
+                }
+                
+                oci_free_statement($stmt);
+            } catch (Exception $e) {
+                echo "Failed to register user: " . $e->getMessage();
+            }
+        }
+        
+        // Usage example:
+        registerUser('john', 'john@example.com', 'password123', $conn);
+    }
+    
 
     $COURSE_ID = $_POST['deleteCourse'];
 
