@@ -87,7 +87,7 @@ include('../model/database.php');
                                     <p>Category: <?php echo $row['CATEGORY_ID']; ?></p>
                                     <p>Available from: <?php echo $row['CREATED_DATE']; ?></p>
                                     <form method="POST">
-                                        <button type="submit" class="btn btn-danger w-100" name="deleteCourse" value="<?php echo $row['COURSE_ID']; ?>">Delete</button>
+                                        <button type="submit" class="btn btn-success w-100" name="deleteCourse" value="<?php echo $row['COURSE_ID']; ?>">Edit</button>
                                     </form>
                                 </div>
                             </div>
