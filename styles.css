@@ -438,34 +438,30 @@ legend {
   text-align: center;
 }
 
-input {
+input,
+textarea {
   width: 100%;
   border: none;
-  padding: 3px;
+  padding: 5px;
   border-radius: 5px;
+  border-bottom: 2px solid var(--tertiary);
   background-color: var(--primary);
+  outline: none;
 }
 .submit-btn {
-  background-image: linear-gradient(
-    270deg,
-    var(--text),
-    var(--tertiary),
-    var(--text),
-    var(--tertiary),
-    var(--secondary),
-    var(--tertiary),
-    var(--text),
-    var(--tertiary),
-    var(--text)
-  );
   padding: 3px;
   border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid var(--text);
+  background-color: var(--primary);
 }
 .auth-submit-button {
-  /* border: 3px solid var(--text); */
   font-weight: bold;
   color: var(--secondaryText);
+  background-color: var(--primary);
+  cursor: pointer;
   border-radius: 8px;
+  border-bottom: none;
 }
 
 /* Responsive container */

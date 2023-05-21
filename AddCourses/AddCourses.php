@@ -1,7 +1,6 @@
 <?php
 include('../model/database.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,7 +71,35 @@ include('../model/database.php');
         </div>
 
         <div class="dashboard_content_section">
-            <h1>Dashboard</h1>
+            <div class="dash_container">
+                <form method="POST" class="row">
+                    <div class="col-6">
+                        <label for="course_name">Course Name</label>
+                        <input type="text" name="COURSE_NAME">
+
+                        <label for="COURSE_DURATION">Course Duration</label>
+                        <input type="number" name="COURSE_DURATION">
+
+                        <label for="COURSE_PRICE">Course Price</label>
+                        <input type="number" name="COURSE_PRICE">
+                    </div>
+
+                    <div class="col-6">
+                        <label for="COURSE_DESCRIPTION">Course Descripion</label>
+                        <textarea type="text" name="COURSE_DESCRIPTION"></textarea>
+
+                        <label for="INSTRUCTOR_ID">Instructor ID</label>
+                        <input type="number" name="INSTRUCTOR_ID">
+
+                        <label for="CATEGORY_ID">Category ID</label>
+                        <input type="number" name="CATEGORY_ID">
+                    </div>
+
+                    <div class="w-25 m-auto">
+                        <button class="btn w-100 " type="submit" name="addCourse">ADD</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -81,6 +108,7 @@ include('../model/database.php');
 
     <!-- bootstarp js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
