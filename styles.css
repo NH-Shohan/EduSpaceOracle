@@ -9,6 +9,23 @@
   --secondaryText: #444444;
   --secondaryText2: #cccccc;
 }
+::-webkit-scrollbar {
+  scroll-behavior: smooth;
+  width: 0.7vw;
+  height: 1vh;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--tertiary);
+  border-radius: 100vw;
+  margin-block: 0.2em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text);
+  border: 0.2em solid var(--tertiary);
+  border-radius: 100vw;
+}
 
 * {
   padding: 0;
