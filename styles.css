@@ -438,7 +438,8 @@ legend {
   text-align: center;
 }
 
-input {
+input,
+textarea {
   width: 100%;
   border: none;
   padding: 5px;
