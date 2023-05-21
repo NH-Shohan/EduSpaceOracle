@@ -64,8 +64,8 @@
                 <?php
                 if (empty($_COOKIE['loggedUser'])) {
                 ?>
-                    <a class="login_btn" href="login.php">Login</a>
-                    <a class="registration_btn" href="registration.php">Registration</a>
+                    <a class="login_btn" href="./../../ADMS/Login/Login.php">Login</a>
+                    <a class="registration_btn" href="./../../ADMS/Registration/Registration.php">Registration</a>
 
                 <?php
                 } else {
@@ -91,7 +91,7 @@
 
                     $_SESSION["authEvent"] = "logout";
                 ?>
-                    <a class="registration_btn" href="./../../../ProjectOracle/Controller/UserController.php">Logout</a>
+                    <a class="registration_btn" href="">Logout</a>
                     <span>
                         <a style="color:var(--darkText);" href="profile.php">
                             <?php echo $userData['NAME'] ?>
