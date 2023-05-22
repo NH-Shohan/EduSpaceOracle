@@ -1,3 +1,9 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+// require_once 'Controller/UserController.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -166,7 +172,10 @@
     <section class="about_eduspace">
         <div class="About_eduspace_details">
             <h1 class="about-tittle About-tittle-header">Journey of<span id="part-about-tittle"> EduSpace</span></h1>
-            <P class="about-para">EduSpace is an online learning platform that offers a wide variety of courses taught by expert instructors. The courses cover a broad range of topics, from coding and web development to business and personal development. Users can enroll in courses individually or sign up for a subscription that provides access to all courses on the platform.</P>
+            <P class="about-para">EduSpace is an online learning platform that offers a wide variety of courses taught
+                by expert instructors. The courses cover a broad range of topics, from coding and web development to
+                business and personal development. Users can enroll in courses individually or sign up for a
+                subscription that provides access to all courses on the platform.</P>
             <a src=""><button class="about-btn">Explore more <i class="fa-solid fa-arrow-right"></i></button></a>
         </div>
         <div>

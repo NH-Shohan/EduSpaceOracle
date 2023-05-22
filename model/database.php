@@ -1,29 +1,29 @@
 <?php
 
-    function connection()
-        {
-            $connectionObject = oci_connect("system","1234","localhost/XE");
-            if(!$connectionObject){
-
-                $error = oci_error();
-                trigger_error(htmlentities($error['message'], ENT_QUOTES),E_USER_ERROR);
-            }
-            
-            return $connectionObject;
-    }
-
-
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    $conn = oci_connect("system", "1234", "localhost/XE");
-    if (!$conn) {
+function connection()
+{
+    $connectionObject = oci_connect("eduspaceMay", "eduspace23", "localhost:1521/ORCL");
+    if (!$connectionObject) {
 
         $error = oci_error();
         trigger_error(htmlentities($error['message'], ENT_QUOTES), E_USER_ERROR);
     }
 
-if(isset($_POST['updateCourse'])){
+    return $connectionObject;
+}
+
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$conn = oci_connect("eduspaceMay", "eduspace23", "localhost:1521/ORCL");
+if (!$conn) {
+
+    $error = oci_error();
+    trigger_error(htmlentities($error['message'], ENT_QUOTES), E_USER_ERROR);
+}
+
+if (isset($_POST['updateCourse'])) {
     $connection = connection();
     $ID = $_REQUEST['updateCourse'];
     echo $ID;
@@ -69,8 +69,8 @@ if (isset($_POST['login'])) {
                 oci_free_statement($stmt2);
                 header("Location: ../index.php");
                 $_SESSION['VALID'] = "LOGGEDIN";
-                $_SESSION['User_Name']  = $row1['ADMIN_NAME'];
-                $_SESSION['User_Email']  = $row1['ADMIN_EMAIL'];
+                $_SESSION['User_Name'] = $row1['ADMIN_NAME'];
+                $_SESSION['User_Email'] = $row1['ADMIN_EMAIL'];
             } else {
                 // Invalid username or password
 
@@ -160,38 +160,39 @@ if (isset($_POST['deleteCourse'])) {
         }
     }
 
-    if(1==1){
-        function registerUser($username, $email, $password, $conn) {
+    if (1 == 1) {
+        function registerUser($username, $email, $password, $conn)
+        {
             $sql = "INSERT INTO Users (user_id, username, email, password)
                     VALUES (user_id_seq.NEXTVAL, :username, :email, :password)";
-            
+
             $stmt = oci_parse($conn, $sql);
             oci_bind_by_name($stmt, ':username', $username);
             oci_bind_by_name($stmt, ':email', $email);
             oci_bind_by_name($stmt, ':password', $password);
-            
+
             try {
                 oci_execute($stmt);
-                
+
                 // Check if the user was registered successfully
                 $rowsAffected = oci_num_rows($stmt);
-                
+
                 if ($rowsAffected > 0) {
                     echo "User registered successfully.";
                 } else {
                     echo "Failed to register user.";
                 }
-                
+
                 oci_free_statement($stmt);
             } catch (Exception $e) {
                 echo "Failed to register user: " . $e->getMessage();
             }
         }
-        
+
         // Usage example:
         registerUser('john', 'john@example.com', 'password123', $conn);
     }
-    
+
 
     $COURSE_ID = $_POST['deleteCourse'];
 

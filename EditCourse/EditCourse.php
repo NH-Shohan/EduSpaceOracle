@@ -16,7 +16,8 @@ include('../model/database.php');
     <link rel="stylesheet" href="./../../ADMS/styles.css">
 
     <!-- bootstrap link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <style>
         .dashboard_container {
@@ -63,44 +64,45 @@ include('../model/database.php');
         <div class="dashboard_content_section">
             <div class="dash_container">
                 <form method="POST" class="row">
-                <?php 
-                    if(isset($_POST['editCourse'])){
-                        function UPDATECOURSE() {
+                    <?php
+                    if (isset($_POST['editCourse'])) {
+                        function UPDATECOURSE()
+                        {
                             $id = $_POST['editCourse'];
                             $connection = connection();
                             $sql = "SELECT * FROM course where course_id = $id";
-                            
+
                             $stmt = oci_parse($connection, $sql);
-                            
+
                             try {
                                 oci_execute($stmt);
                                 while ($row = oci_fetch_assoc($stmt)) {
-                                
-                                    
-                                            echo  '<div class="col-6">
+
+
+                                    echo '<div class="col-6">
                                             <label for="course_name">Course Name</label>
-                                            <input type="text" name="COURSE_NAME" value='.$row['COURSE_NAME'].'>
+                                            <input type="text" name="COURSE_NAME" value=' . $row['COURSE_NAME'] . '>
 
                                             <label for="COURSE_DURATION">Course Duration</label>
-                                            <input type="number" name="COURSE_DURATION" value='.$row['COURSE_DURATION'].'>
+                                            <input type="number" name="COURSE_DURATION" value=' . $row['COURSE_DURATION'] . '>
 
                                             <label for="COURSE_PRICE">Course Price</label>
-                                            <input type="number" name="COURSE_PRICE" value='.$row['COURSE_PRICE'].'>
+                                            <input type="number" name="COURSE_PRICE" value=' . $row['COURSE_PRICE'] . '>
                                         </div>
 
                                         <div class="col-6">
                                             <label for="COURSE_DESCRIPTION">Course Descripion</label>
-                                            <input type="text" name="COURSE_DESCRIPTION" value='.$row['COURSE_DESCRIPTION'].'></input>
+                                            <input type="text" name="COURSE_DESCRIPTION" value=' . $row['COURSE_DESCRIPTION'] . '></input>
 
                                             <label for="INSTRUCTOR_ID">Instructor ID</label>
-                                            <input type="number" name="INSTRUCTOR_ID" value='.$row['INSTRUCTOR_ID'].'>
+                                            <input type="number" name="INSTRUCTOR_ID" value=' . $row['INSTRUCTOR_ID'] . '>
 
                                             <label for="CATEGORY_ID">Category ID</label>
-                                            <input type="number" name="CATEGORY_ID" value='.$row['CATEGORY_ID'].'>
+                                            <input type="number" name="CATEGORY_ID" value=' . $row['CATEGORY_ID'] . '>
                                         </div>
 
                                         <div class="w-25 m-auto">
-                                            <button class="btn btn-success w-100 " type="submit" name="updateCourse">UPDATE</button>
+                                            <button class="btn btn-success w-100 " type="submit" name="updateCourse" value=' . $row['COURSE_ID'] . '>UPDATE</button>
                                         </div>';
 
 
@@ -112,8 +114,8 @@ include('../model/database.php');
 
                         UPDATECOURSE();
                     }
-                ?>
-                    
+                    ?>
+
                 </form>
             </div>
 
@@ -131,26 +133,43 @@ include('../model/database.php');
 
                         while ($row = oci_fetch_assoc($stmt)) {
                             // Process each row and display course information
-                ?>
+                            ?>
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo $row['COURSE_NAME']; ?></h5>
-                                    <p class="card-text"><?php echo $row['COURSE_DESCRIPTION']; ?></p>
-                                    <p>Course ID: <?php echo $row['COURSE_ID']; ?></p>
-                                    <p>Price: <?php echo $row['COURSE_PRICE']; ?></p>
-                                    <p>Duration: <?php echo $row['COURSE_DURATION']; ?></p>
-                                    <p>Instructor ID: <?php echo $row['INSTRUCTOR_ID']; ?></p>
-                                    <p>Category: <?php echo $row['CATEGORY_ID']; ?></p>
-                                    <p>Available from: <?php echo $row['CREATED_DATE']; ?></p>
+                                    <h5 class="card-title">
+                                        <?php echo $row['COURSE_NAME']; ?>
+                                    </h5>
+                                    <p class="card-text">
+                                        <?php echo $row['COURSE_DESCRIPTION']; ?>
+                                    </p>
+                                    <p>Course ID:
+                                        <?php echo $row['COURSE_ID']; ?>
+                                    </p>
+                                    <p>Price:
+                                        <?php echo $row['COURSE_PRICE']; ?>
+                                    </p>
+                                    <p>Duration:
+                                        <?php echo $row['COURSE_DURATION']; ?>
+                                    </p>
+                                    <p>Instructor ID:
+                                        <?php echo $row['INSTRUCTOR_ID']; ?>
+                                    </p>
+                                    <p>Category:
+                                        <?php echo $row['CATEGORY_ID']; ?>
+                                    </p>
+                                    <p>Available from:
+                                        <?php echo $row['CREATED_DATE']; ?>
+                                    </p>
                                     <form method="POST">
-                                        <button type="submit" class="btn btn-success w-100" name="editCourse" value="<?php echo $row['COURSE_ID']; ?>">Edit</button>
+                                        <button type="submit" class="btn btn-success w-100" name="editCourse"
+                                            value="<?php echo $row['COURSE_ID']; ?>">Edit</button>
                                     </form>
                                 </div>
                             </div>
                             <br>
 
-                <?php
+                            <?php
                         }
 
 
@@ -171,7 +190,9 @@ include('../model/database.php');
     <script src="./navbarScript.js"></script>
 
     <!-- bootstarp js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
