@@ -21,6 +21,8 @@ include('../model/database.php');
         .card_container {
             margin-inline: 15%;
             margin-block: 80px !important;
+            justify-content: center;
+            display: flex;
         }
 
         .card-text {
@@ -68,7 +70,15 @@ include('../model/database.php');
 
 <body>
     <?php include "./../../ADMS/Shared/Navbar.php" ?>
+
     <div class="mt-5 card_container row gap-2">
+        <div class="container-fluid mb-3">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+
         <?php
         function showAllCourses($conn)
         {
@@ -82,7 +92,6 @@ include('../model/database.php');
                 while ($row = oci_fetch_assoc($stmt)) {
                     // Process each row and display course information
         ?>
-
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['COURSE_NAME']; ?></h5>

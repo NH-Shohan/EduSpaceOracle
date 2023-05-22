@@ -2,7 +2,8 @@
 
 function connection()
 {
-    $connectionObject = oci_connect("eduspaceMay", "eduspace23", "localhost:1521/ORCL");
+    // $connectionObject = oci_connect("system", "Anamika", "localhost/XE");
+    $connectionObject = oci_connect("system", "Anamika", "localhost/XE");
     if (!$connectionObject) {
 
         $error = oci_error();
@@ -16,7 +17,8 @@ function connection()
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$conn = oci_connect("eduspaceMay", "eduspace23", "localhost:1521/ORCL");
+// $conn = oci_connect("system", "Anamika", "localhost/XE");
+$conn = oci_connect("system", "Anamika", "localhost/XE");
 if (!$conn) {
 
     $error = oci_error();
